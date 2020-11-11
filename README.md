@@ -76,3 +76,96 @@ mvn clean install
 [INFO] Installing /Users/timurdjumaev/maven-quick-start/pom.xml to /Users/timurdjumaev/.m2/repository/clinic/programming/maven-quick-start/1.0/maven-quick-start-1.0.pom
 
 
+
+ # MAVEN PLUGINS - a way to exhance or extend or change the way MAVEN works
+* Critical Part of Maven
+* Everything
+    * Default/Core Functionality
+    * Additional Functionality
+* Maven = Plugin Engine
+    * Plugins Implement Functionality
+    * Add more Goals
+* Plugins Are Dependencies
+    * Download from Repositories
+
+* Plugin Examples:
+    - Compile Source Code
+    - Run Unit Test
+    - Publish to Artifact Repository
+    - Deploy to Remote Server
+    - Publish Documentation
+    - Much more
+
+* Basic Set
+* Common/Core
+    - Known to Maven
+    - Downloaded Upon Reference
+* Others
+    - Mentioned in Project POM
+* Changed Plugin Behavior
+    - Specify in POM Configuration
+
+# MAVEN DEPENDENCIES
+* Dependancy Management
+* Finding Dependencies (External Repositories)
+* Controling When Used (Scoped)
+# The main strength of Maven is Dependency Manegement.
+- Just specify the main dependency of the project and Maven will automatically find any additional dependancies
+- By default MAVEN is configured to resolved dependancies from Maven Central repo online, however additional repositories can be configured also
+- Maven will look at Local private repo first wich acts like a cache
+- When specifying the dependancy we must determine which scope deploys dependancy for our project
+- Maven supports 6 Scopes, 4 commonly used:
+    - Compile:
+        * Default
+        * Compilation and Execution
+        * Added to Dependancy Projects
+        * Included in Containers (war/ear)
+    - Runtime:
+        * Deployment/Runtime
+        * Not required for Compilation
+        * Included in Containers (war/ear)
+    - Test:
+        * Testing only
+        * Not needed for compilation, deployment/runtime
+    - Provided:
+        * Provided by Target: Web Application, Application Server
+    - System:
+        * Rarely used
+        * Local Dependencies - Lib Folder
+        * Not recommended, unless Extreme Scenario
+    - Import:
+        * Rarely used, almost never
+        * Specialized cases
+        * Replace Dependencies
+
+
+# The command below will show how dependencies resolve against each other                    
+mvn dependency:tree
+mvn dependency:tree > dependency-list.txt
+
+# TESTING
+
+cd /Users/timurdjumaev/maven-quick-start/src/test/java
+mkdir -p clinic/programming/training
+cd clinic/programming/training
+nano ApplicationTest.java
+
+We also need to update our POM by adding snippet of junit:junit:
+4.13.1	from Maven Central Repo https://search.maven.org/artifact/junit/junit/4.13.1/jar
+
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.13.1</version>
+</dependency>
+
+After saving our POM file we can run the test by:
+
+mvn test (Maven compiles and tests our source code)
+mvm clean install
+
+Now when the test is run you can go to ~/maven-quick-start/target/surefire-reports and see the report of testing!
+
+
+ 
+
